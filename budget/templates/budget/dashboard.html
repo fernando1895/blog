@@ -1,0 +1,127 @@
+{% extends 'blog/base.html' %}
+
+{% block col_class %}col-md-12{% endblock %}
+
+{% block content %}
+<div class="budget-header">
+    <h1>Presupuesto Familiar</h1>
+    <div class="budget-nav">
+        <a href="{% url 'budget_dashboard' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-home"></span> Resumen
+        </a>
+        <a href="{% url 'transaction_list' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-list"></span> Transacciones
+        </a>
+        <a href="{% url 'category_list' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-tags"></span> Categorías
+        </a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'transaction_new' %}" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus"></span> Nueva Transacción
+        </a>
+        {% endif %}
+    </div>
+</div>
+<hr>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="panel panel-success">
+            <div class="panel-heading"><h3 class="panel-title">Total Ingresos</h3></div>
+            <div class="panel-body budget-amount income">
+                $ {{ total_income }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><h3 class="panel-title">Total Gastos</h3></div>
+            <div class="panel-body budget-amount expense">
+                $ {{ total_expense }}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel {% if balance >= 0 %}panel-info{% else %}panel-warning{% endif %}">
+            <div class="panel-heading"><h3 class="panel-title">Balance</h3></div>
+            <div class="panel-body budget-amount balance">
+                $ {{ balance }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>Gastos por Categoría</h3>
+{% if category_data %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Categoría</th>
+            <th class="text-right">Ingresos</th>
+            <th class="text-right">Gastos</th>
+            <th class="text-right">Neto</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in category_data %}
+        <tr>
+            <td>
+                <span class="glyphicon {{ item.category.icon }}"
+                      style="color: {{ item.category.color }};"></span>
+                {{ item.category.name }}
+            </td>
+            <td class="text-right income">$ {{ item.income }}</td>
+            <td class="text-right expense">$ {{ item.expense }}</td>
+            <td class="text-right {% if item.net >= 0 %}income{% else %}expense{% endif %}">
+                $ {{ item.net }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-muted">No hay categorías registradas aún.
+    <a href="{% url 'category_new' %}">Agregar categoría</a></p>
+{% endif %}
+
+<h3>Transacciones Recientes</h3>
+{% if recent_transactions %}
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Categoría</th>
+            <th>Tipo</th>
+            <th class="text-right">Monto</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in recent_transactions %}
+        <tr>
+            <td>{{ t.date }}</td>
+            <td>{{ t.description }}</td>
+            <td>{{ t.category.name }}</td>
+            <td>
+                {% if t.transaction_type == 'ingreso' %}
+                <span class="label label-success">Ingreso</span>
+                {% else %}
+                <span class="label label-danger">Gasto</span>
+                {% endif %}
+            </td>
+            <td class="text-right {% if t.transaction_type == 'ingreso' %}income{% else %}expense{% endif %}">
+                $ {{ t.amount }}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'transaction_list' %}">Ver todas las transacciones &raquo;</a>
+{% else %}
+<p class="text-muted">No hay transacciones registradas aún.
+    {% if user.is_authenticated %}
+    <a href="{% url 'transaction_new' %}">Agregar transacción</a>
+    {% endif %}
+</p>
+{% endif %}
+{% endblock %}

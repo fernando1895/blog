@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^healthz/ready', healthz.ready),
     url(r'^healthz/alive', healthz.alive),
     url(r'^admin/', admin.site.urls),
+    url(r'^presupuesto/', include('budget.urls')),
     url(r'', include('blog.urls')),
 ]
 

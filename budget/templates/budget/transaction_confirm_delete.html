@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+
+{% block col_class %}col-md-10{% endblock %}
+
+{% block content %}
+<div class="budget-header">
+    <h1>Confirmar Eliminación</h1>
+    <div class="budget-nav">
+        <a href="{% url 'budget_dashboard' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-home"></span> Resumen
+        </a>
+        <a href="{% url 'transaction_list' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-list"></span> Transacciones
+        </a>
+        <a href="{% url 'category_list' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-tags"></span> Categorías
+        </a>
+    </div>
+</div>
+<hr>
+
+<div class="alert alert-danger">
+    <p>¿Está seguro que desea eliminar {{ object_type }} <strong>{{ object }}</strong>?</p>
+    <p>Esta acción no se puede deshacer.</p>
+</div>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">
+        <span class="glyphicon glyphicon-trash"></span> Sí, eliminar
+    </button>
+    <a href="javascript:history.back()" class="btn btn-default">
+        <span class="glyphicon glyphicon-remove"></span> Cancelar
+    </a>
+</form>
+{% endblock %}
