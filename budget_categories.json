@@ -1,0 +1,10 @@
+[
+    {"model": "budget.category", "pk": 1, "fields": {"name": "Comida", "description": "Gastos en alimentación y supermercado", "icon": "glyphicon-cutlery", "color": "#4CAF50"}},
+    {"model": "budget.category", "pk": 2, "fields": {"name": "Combustible", "description": "Gasolina y gastos de transporte", "icon": "glyphicon-oil", "color": "#FF9800"}},
+    {"model": "budget.category", "pk": 3, "fields": {"name": "Ropa", "description": "Ropa, calzado y accesorios", "icon": "glyphicon-shopping-cart", "color": "#9C27B0"}},
+    {"model": "budget.category", "pk": 4, "fields": {"name": "Medicamentos", "description": "Farmacia, medicamentos y salud", "icon": "glyphicon-plus-sign", "color": "#F44336"}},
+    {"model": "budget.category", "pk": 5, "fields": {"name": "Colegio", "description": "Gastos escolares, útiles y matrícula", "icon": "glyphicon-education", "color": "#2196F3"}},
+    {"model": "budget.category", "pk": 6, "fields": {"name": "Servicios", "description": "Agua, luz, gas, internet y teléfono", "icon": "glyphicon-home", "color": "#607D8B"}},
+    {"model": "budget.category", "pk": 7, "fields": {"name": "Entretenimiento", "description": "Cine, restaurantes y actividades de ocio", "icon": "glyphicon-star", "color": "#FF5722"}},
+    {"model": "budget.category", "pk": 8, "fields": {"name": "Ingresos", "description": "Salario y otros ingresos", "icon": "glyphicon-usd", "color": "#009688"}}
+]

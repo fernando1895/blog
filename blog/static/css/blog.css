@@ -50,3 +50,37 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
     color: #000000;
 }
+
+/* Budget App Styles */
+.budget-header {
+    margin-bottom: 10px;
+}
+
+.budget-nav {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.budget-nav .btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.budget-amount {
+    font-size: 28pt;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+}
+
+.income {
+    color: #2e7d32;
+}
+
+.expense {
+    color: #c62828;
+}
+
+.balance {
+    color: #0277bd;
+}
