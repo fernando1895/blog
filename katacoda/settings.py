@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'mod_wsgi.server',
     'blog',
     'budget',
+    'consolidacion',
 ]
 
 MIDDLEWARE = [
