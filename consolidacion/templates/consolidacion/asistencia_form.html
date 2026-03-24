@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block col_class %}col-md-10{% endblock %}
+
+{% block content %}
+<div class="budget-header">
+    <h1>{{ title }}</h1>
+    <p class="text-muted">Ministerio de Consolidación &amp; Ministración — Dpto. de Consolidación y Célula</p>
+    <div class="budget-nav">
+        <a href="{% url 'consolidacion_dashboard' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-home"></span> Resumen
+        </a>
+        <a href="{% url 'consolidacion_list' %}" class="btn btn-default">
+            <span class="glyphicon glyphicon-list"></span> Asistencias
+        </a>
+    </div>
+</div>
+<hr>
+
+<form method="POST" class="form-horizontal">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}has-error{% endif %}">
+        <label class="col-sm-3 control-label">{{ field.label }}</label>
+        <div class="col-sm-6">
+            {{ field }}
+            {% if field.errors %}
+            <span class="help-block">{{ field.errors }}</span>
+            {% endif %}
+            {% if field.help_text %}
+            <p class="help-block">{{ field.help_text }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-6">
+            <button type="submit" class="btn btn-success">
+                <span class="glyphicon glyphicon-floppy-disk"></span> Guardar
+            </button>
+            <a href="{% url 'consolidacion_list' %}" class="btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span> Cancelar
+            </a>
+        </div>
+    </div>
+</form>
+{% endblock %}
